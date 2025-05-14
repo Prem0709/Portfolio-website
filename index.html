@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premkumar Pawar - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a2526;
+            --text-color: #e5e7eb;
+            --accent-color: #00ddeb;
+            --card-bg: #2a3536;
+            --accent-hover: #00b7c3;
+        }
+        [data-theme="light"] {
+            --bg-color: #f3f4f6;
+            --text-color: #1f2937;
+            --card-bg: #ffffff;
+            --accent-hover: #00a1a9;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+        .section-title {
+            color: var(--accent-color);
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent-color);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .btn {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: var(--accent-hover);
+            transform: scale(1.05);
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: var(--card-bg);
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 221, 235, 0.3);
+        }
+        .hero-img {
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+        .hero-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 221, 235, 0.4);
+        }
+        .social-icon {
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.3);
+            color: var(--accent-hover);
+        }
+        .refresh-btn, .theme-toggle {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease;
+        }
+        .refresh-btn:hover, .theme-toggle:hover {
+            background-color: var(--accent-hover);
+        }
+        .error-message {
+            color: #ff6b6b;
+            text-align: center;
+            margin: 1rem 0;
+            animation: fadeIn 0.5s ease-in;
+        }
+        .success-message {
+            color: #34d399;
+            text-align: center;
+            margin: 1rem 0;
+            animation: fadeIn 0.5s ease-in;
+        }
+        .loading-spinner {
+            color: var(--accent-color);
+            text-align: center;
+            margin: 1rem 0;
+            animation: spin 1s linear infinite;
+        }
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s ease;
+        }
+        .contact-item:hover {
+            transform: scale(1.05);
+        }
+        .contact-icon {
+            background-color: var(--card-bg);
+            padding: 1rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Enhanced Responsiveness */
+        @media (max-width: 640px) {
+            .section-title {
+                font-size: 1.75rem;
+            }
+            .section-title::after {
+                width: 60px;
+            }
+            .nav-link {
+                font-size: 0.9rem;
+            }
+            .refresh-btn, .theme-toggle {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .hero-img {
+                width: 48px;
+                height: 48px;
+            }
+            #hero-name {
+                font-size: 2rem;
+            }
+            #hero-title {
+                font-size: 1.25rem;
+            }
+            #hero-description {
+                font-size: 0.9rem;
+            }
+            .btn {
+                padding: 0.5rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .card img {
+                height: 120px;
+            }
+            .card h3 {
+                font-size: 1.1rem;
+            }
+            .card p {
+                font-size: 0.85rem;
+            }
+            .contact-item h3 {
+                font-size: 1rem;
+            }
+            .contact-item p, .contact-item a {
+                font-size: 0.85rem;
+            }
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+            }
+            .contact-icon i {
+                font-size: 1rem;
+            }
+            form input, form textarea {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+            footer p, footer a {
+                font-size: 0.85rem;
+            }
+        }
+        @media (min-width: 641px) and (max-width: 1023px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .hero-img {
+                width: 200px;
+                height: 200px;
+            }
+            #hero-name {
+                font-size: 3rem;
+            }
+            .card img {
+                height: 160px;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans transition-all duration-300">
+    <!-- Navigation -->
+    <nav class="bg-[var(--bg-color)] p-4 sticky top-0 border-b border-gray-700 z-50 shadow-lg">
+        <div class="container mx-auto flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
+            <h1 class="text-xl font-bold">Portfolio.</h1>
+            <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#projects" class="nav-link">Portfolio</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <button id="refresh-btn" class="refresh-btn">Refresh</button>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-12 sm:py-20 min-h-screen flex items-center bg-gradient-to-b from-[var(--bg-color)] to-[var(--card-bg)]" data-aos="fade-up">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-6">
+            <div class="md:w-1/2 mb-6 md:mb-0 text-center md:text-left" data-aos="fade-right" data-aos-delay="200">
+                <h2 class="text-xl sm:text-2xl md:text-3xl">Hello, It's Me</h2>
+                <h1 id="hero-name" class="text-3xl sm:text-4xl md:text-5xl font-bold mb-4"></h1>
+                <h3 class="text-lg sm:text-xl md:text-2xl mb-6">And I'm a <span id="hero-title" class="text-[var(--accent-color)]"></span></h3>
+                <p id="hero-description" class="text-gray-400 mb-6 leading-relaxed text-sm sm:text-base"></p>
+                <div id="social-links" class="flex justify-center md:justify-start space-x-4 mb-6"></div>
+                <a href="#contact" class="btn inline-block">Get in Touch</a>
+            </div>
+            <div class="md:w-1/2 flex justify-center" data-aos="zoom-in" data-aos-delay="400">
+                <img id="hero-image" src="" alt="Profile Picture" class="hero-img w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full border-4 border-[var(--accent-color)] object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-12 sm:py-16" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center gap-6 sm:gap-8">
+                <div class="md:w-1/2 flex justify-center mb-6 md:mb-0" data-aos="zoom-in" data-aos-delay="200">
+                    <img id="about-image" src="" alt="Profile Picture" class="w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-80 lg:h-80 rounded-full border-4 border-[var(--accent-color)] object-cover">
+                </div>
+                <div class="md:w-1/2 text-center md:text-left" data-aos="fade-left" data-aos-delay="400">
+                    <h3 id="about-title" class="text-xl sm:text-2xl md:text-3xl font-semibold mb-4"></h3>
+                    <p id="about-description" class="text-gray-400 leading-relaxed mb-6 text-sm sm:text-base"></p>
+                    <a id="about-link" href="#" class="btn inline-block">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-12 sm:py-16 bg-[var(--card-bg)]" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">My Services</h2>
+            <div id="services-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-12 sm:py-16" data-aos="fade-up">
+        <div class="container mx-auto px-4">
+            <h2 class="section-title">My Projects</h2>
+            <div id="projects-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-12 sm:py-16 bg-[var(--bg-color)]" data-aos="fade-up">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="section-title">Contact Me</h2>
+            <p class="text-gray-400 mb-8 sm:mb-12 text-sm sm:text-base">Below are the details to reach out to me!</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mb-8 sm:mb-12">
+                <div class="contact-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt text-[var(--accent-color)] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold">Address</h3>
+                    <p class="text-gray-400">Hyderabad, Telangana, India</p>
+                </div>
+                <div class="contact-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt text-[var(--accent-color)] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold">Contact Number</h3>
+                    <p class="text-gray-400">+91 9966642877</p>
+                </div>
+                <div class="contact-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope text-[var(--accent-color)] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold">Email Address</h3>
+                    <p class="text-gray-400">kdatascientist@gmail.com</p>
+                </div>
+                <div class="contact-item" data-aos="fade-up" data-aos-delay="800">
+                    <div class="contact-icon">
+                        <i class="fas fa-file-download text-[var(--accent-color)] text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold">Download Resume</h3>
+                    <a href="https://drive.google.com/file/d/18RH9N5dxGIc0zJEdff078S9PssLdVbUr/view?usp=sharing" class="text-gray-400 hover:text-[var(--accent-color)]">Resume Link</a>
+                </div>
+            </div>
+            <div class="mb-8 sm:mb-12" data-aos="fade-up" data-aos-delay="1000">
+                <p class="text-gray-400 mb-4 text-sm sm:text-base">Find me on</p>
+                <a href="https://www.linkedin.com/in/premkumar-pawar0709" class="social-icon text-[var(--accent-color)]">
+                    <i class="fab fa-linkedin text-2xl"></i>
+                </a>
+            </div>
+            <div id="form-message" class="hidden"></div>
+            <form id="contact-form" class="max-w-full sm:max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="1200">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <input type="text" name="firstName" placeholder="First Name" class="bg-[var(--card-bg)] text-[var(--text-color)] p-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition-all duration-300 border border-gray-600" required>
+                    <input type="text" name="lastName" placeholder="Last Name" class="bg-[var(--card-bg)] text-[var(--text-color)] p-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition-all duration-300 border border-gray-600" required>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                    <input type="tel" name="phone" placeholder="Mobile Number" class="bg-[var(--card-bg)] text-[var(--text-color)] p-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition-all duration-300 border border-gray-600" required>
+                    <input type="email" name="email" placeholder="Email Address" class="bg-[var(--card-bg)] text-[var(--text-color)] p-4 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition-all duration-300 border border-gray-600" required>
+                </div>
+                <textarea name="message" placeholder="Your Message" rows="5" class="bg-[var(--card-bg)] text-[var(--text-color)] p-4 rounded-lg w-full mb-4 focus:outline-none focus:ring-2 focus:ring-[var(--accent-color)] transition-all duration-300 border border-gray-600" required></textarea>
+                <button type="submit" class="btn w-full">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[var(--bg-color)] text-center p-6 border-t border-gray-700">
+        <p>© 2025 Premkumar Pawar. All rights reserved.</p>
+        <div class="mt-2 flex justify-center gap-4">
+            <a href="#home" class="text-[var(--accent-color)] hover:text-[var(--accent-hover)]">Home</a>
+            <a href="#about" class="text-[var(--accent-color)] hover:text-[var(--accent-hover)]">About</a>
+            <a href="#contact" class="text-[var(--accent-color)] hover:text-[var(--accent-hover)]">Contact</a>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for Icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- AOS Library Script -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100,
+        });
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.dataset.theme || 'dark';
+            document.body.dataset.theme = currentTheme === 'dark' ? 'light' : 'dark';
+            themeToggle.innerHTML = `<i class="fas fa-${currentTheme === 'dark' ? 'sun' : 'moon'}"></i>`;
+            localStorage.setItem('theme', document.body.dataset.theme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.dataset.theme = savedTheme;
+        themeToggle.innerHTML = `<i class="fas fa-${savedTheme === 'dark' ? 'moon' : 'sun'}"></i>`;
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+
+        // Parallax effect for hero image
+        window.addEventListener('scroll', () => {
+            const heroImg = document.querySelector('.hero-img');
+            const scrollPosition = window.scrollY;
+            heroImg.style.transform = `translateY(${scrollPosition * 0.2}px) scale(1.05)`;
+        });
+
+        // Fallback data
+        const fallbackData = {
+            hero: {
+                name: "Premkumar Pawar",
+                title: "Aspiring Data Scientist",
+                description: "I'm a passionate developer with a focus on machine learning, Python, and data visualization, eager to contribute to a data-driven team.",
+                image: "https://via.placeholder.com/300",
+                socialLinks: [
+                    { platform: "linkedin", url: "https://www.linkedin.com/in/premkumar-pawar0709", name: "LinkedIn" },
+                    { platform: "github", url: "https://github.com/Prem0709", name: "GitHub" }
+                ]
+            },
+            about: {
+                title: "About Me",
+                description: "I'm a B.Tech student in Computer Science and Engineering with expertise in machine learning, Python, and data visualization. I have hands-on experience in predictive modeling, EDA, and AI-driven content generation, aiming to transform data into actionable insights.",
+                image: "https://via.placeholder.com/300",
+                readMoreLink: "#"
+            },
+            services: [
+                {
+                    icon: "fas fa-code",
+                    title: "Machine Learning",
+                    description: "Building predictive models using supervised and unsupervised techniques with Scikit-learn.",
+                    link: "#"
+                },
+                {
+                    icon: "fas fa-chart-bar",
+                    title: "Data Visualization",
+                    description: "Creating insightful visualizations using Matplotlib, Seaborn, and Power BI.",
+                    link: "#"
+                },
+                {
+                    icon: "fas fa-robot",
+                    title: "Prompt Engineering",
+                    description: "Leveraging LLMs like ChatGPT and Gemini for AI-driven content generation.",
+                    link: "#"
+                }
+            ],
+            projects: [
+                {
+                    image: "https://via.placeholder.com/300x200",
+                    title: "Driver Drowsiness Detection System",
+                    description: "A real-time web app using Flask and OpenCV to monitor driver fatigue with live alerts.",
+                    link: "#",
+                    tags: ["Flask", "OpenCV", "Computer Vision"]
+                },
+                {
+                    image: "https://via.placeholder.com/300x200",
+                    title: "Credit Card Fraud Detection",
+                    description: "ML models to detect fraud in imbalanced datasets using SMOTE and XGBoost.",
+                    link: "#",
+                    tags: ["Python", "Scikit-learn", "XGBoost"]
+                },
+                {
+                    image: "https://via.placeholder.com/300x200",
+                    title: "LinkedIn Job Market Analysis",
+                    description: "EDA on 10,000+ job postings to analyze salary trends and skills demand.",
+                    link: "#",
+                    tags: ["Pandas", "Seaborn", "Matplotlib"]
+                },
+                {
+                    image: "https://via.placeholder.com/300x200",
+                    title: "EDA Automation Tool",
+                    description: "GenAI-powered tool for automated data profiling using Mistral and Gradio.",
+                    link: "#",
+                    tags: ["Mistral", "Gradio", "Pandas"]
+                }
+            ]
+        };
+
+        // Display message (error or success)
+        function displayMessage(message, type = 'error') {
+            const messageDiv = document.getElementById('form-message');
+            messageDiv.className = type === 'error' ? 'error-message' : 'success-message';
+            messageDiv.textContent = message;
+            messageDiv.classList.remove('hidden');
+            setTimeout(() => messageDiv.classList.add('hidden'), 5000);
+        }
+
+        // Toggle loading state
+        function toggleLoading(show) {
+            let loadingSpinner = document.querySelector('.loading-spinner');
+            if (show) {
+                if (!loadingSpinner) {
+                    loadingSpinner = document.createElement('div');
+                    loadingSpinner.className = 'loading-spinner';
+                    loadingSpinner.innerHTML = '<i class="fas fa-spinner"></i> Loading...';
+                    document.body.insertBefore(loadingSpinner, document.body.firstChild);
+                }
+            } else {
+                if (loadingSpinner) loadingSpinner.remove();
+            }
+        }
+
+        // Load data from JSON
+        async function loadData() {
+            toggleLoading(true);
+            try {
+                const response = await fetch('data.json');
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                const data = await response.json();
+
+                // Populate Hero Section
+                document.getElementById('hero-name').textContent = data.hero.name;
+                document.getElementById('hero-title').textContent = data.hero.title;
+                document.getElementById('hero-description').textContent = data.hero.description;
+                document.getElementById('hero-image').src = data.hero.image;
+
+                const socialLinksContainer = document.getElementById('social-links');
+                socialLinksContainer.innerHTML = '';
+                data.hero.socialLinks.forEach(link => {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.title = link.name;
+                    a.className = 'social-icon text-[var(--accent-color)]';
+                    a.innerHTML = `<i class="fab fa-${link.platform} text-2xl"></i>`;
+                    socialLinksContainer.appendChild(a);
+                });
+
+                // Populate About Section
+                document.getElementById('about-title').textContent = data.about.title;
+                document.getElementById('about-description').textContent = data.about.description;
+                document.getElementById('about-image').src = data.about.image;
+                document.getElementById('about-link').href = data.about.readMoreLink;
+
+                // Populate Services Section
+                const servicesContainer = document.getElementById('services-list');
+                servicesContainer.innerHTML = '';
+                data.services.forEach((service, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'card p-4 sm:p-6 rounded-lg text-center shadow-lg';
+                    div.setAttribute('data-aos', 'flip-up');
+                    div.setAttribute('data-aos-delay', (index * 200).toString());
+                    div.innerHTML = `
+                        <i class="${service.icon} text-[var(--accent-color)] text-3xl sm:text-4xl mb-4"></i>
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">${service.title}</h3>
+                        <p class="text-gray-400 mb-4 text-sm sm:text-base">${service.description}</p>
+                        <a href="${service.link}" class="btn inline-block">Read More</a>
+                    `;
+                    servicesContainer.appendChild(div);
+                });
+
+                // Populate Projects Section
+                const projectsContainer = document.getElementById('projects-list');
+                projectsContainer.innerHTML = '';
+                data.projects.forEach((project, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'card p-4 sm:p-6 rounded-lg shadow-lg';
+                    div.setAttribute('data-aos', 'fade-up');
+                    div.setAttribute('data-aos-delay', (index * 200).toString());
+                    div.innerHTML = `
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-40 sm:h-48 object-cover rounded-lg mb-4">
+                        <h3 class="text-lg sm:text-xl font-semibold mb-2">${project.title}</h3>
+                        <p class="text-gray-400 mb-4 text-sm sm:text-base">${project.description}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${project.tags ? project.tags.map(tag => `<span class="bg-[var(--accent-color)] text-[var(--bg-color)] px-2 py-1 rounded-full text-xs sm:text-sm">${tag}</span>`).join('') : ''}
+                        </div>
+                        <a href="${project.link}" class="btn inline-block">View Project</a>
+                    `;
+                    projectsContainer.appendChild(div);
+                });
+
+                AOS.refresh();
+            } catch (error) {
+                console.error('Error loading data:', error.message);
+                displayMessage('Failed to load portfolio data. Using fallback content.');
+                loadFallbackData();
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        // Load fallback data
+        function loadFallbackData() {
+            const data = fallbackData;
+            document.getElementById('hero-name').textContent = data.hero.name;
+            document.getElementById('hero-title').textContent = data.hero.title;
+            document.getElementById('hero-description').textContent = data.hero.description;
+            document.getElementById('hero-image').src = data.hero.image;
+
+            const socialLinksContainer = document.getElementById('social-links');
+            socialLinksContainer.innerHTML = '';
+            data.hero.socialLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link.url;
+                a.title = link.name;
+                a.className = 'social-icon text-[var(--accent-color)]';
+                a.innerHTML = `<i class="fab fa-${link.platform} text-2xl"></i>`;
+                socialLinksContainer.appendChild(a);
+            });
+
+            document.getElementById('about-title').textContent = data.about.title;
+            document.getElementById('about-description').textContent = data.about.description;
+            document.getElementById('about-image').src = data.about.image;
+            document.getElementById('about-link').href = data.about.readMoreLink;
+
+            const servicesContainer = document.getElementById('services-list');
+            servicesContainer.innerHTML = '';
+            data.services.forEach((service, index) => {
+                const div = document.createElement('div');
+                div.className = 'card p-4 sm:p-6 rounded-lg text-center shadow-lg';
+                div.setAttribute('data-aos', 'flip-up');
+                div.setAttribute('data-aos-delay', (index * 200).toString());
+                div.innerHTML = `
+                    <i class="${service.icon} text-[var(--accent-color)] text-3xl sm:text-4xl mb-4"></i>
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2">${service.title}</h3>
+                    <p class="text-gray-400 mb-4 text-sm sm:text-base">${service.description}</p>
+                    <a href="${service.link}" class="btn inline-block">Read More</a>
+                `;
+                servicesContainer.appendChild(div);
+            });
+
+            const projectsContainer = document.getElementById('projects-list');
+            projectsContainer.innerHTML = '';
+            data.projects.forEach((project, index) => {
+                const div = document.createElement('div');
+                div.className = 'card p-4 sm:p-6 rounded-lg shadow-lg';
+                div.setAttribute('data-aos', 'fade-up');
+                div.setAttribute('data-aos-delay', (index * 200).toString());
+                div.innerHTML = `
+                    <img src="${project.image}" alt="${project.title}" class="w-full h-40 sm:h-48 object-cover rounded-lg mb-4">
+                    <h3 class="text-lg sm:text-xl font-semibold mb-2">${project.title}</h3>
+                    <p class="text-gray-400 mb-4 text-sm sm:text-base">${project.description}</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        ${project.tags.map(tag => `<span class="bg-[var(--accent-color)] text-[var(--bg-color)] px-2 py-1 rounded-full text-xs sm:text-sm">${tag}</span>`).join('')}
+                    </div>
+                    <a href="${project.link}" class="btn inline-block">View Project</a>
+                `;
+                projectsContainer.appendChild(div);
+            });
+
+            AOS.refresh();
+        }
+
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(contactForm);
+            toggleLoading(true);
+            try {
+                const response = await fetch('https://formspree.io/f/your-form-id', {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    displayMessage('Message sent successfully!', 'success');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                displayMessage('Failed to send message. Please try again.');
+            } finally {
+                toggleLoading(false);
+            }
+        });
+
+        // Initial load
+        loadData();
+
+        // Refresh button
+        document.getElementById('refresh-btn').addEventListener('click', () => {
+            document.getElementById('form-message').classList.add('hidden');
+            loadData();
+        });
+    </script>
+</body>
+</html>
