@@ -3,7 +3,7 @@
         "name": "Premkumar Pawar",
         "title": "Aspiring Data Scientist",
         "description": "I'm a passionate B.Tech student specializing in machine learning, Python, and data visualization, with hands-on experience in predictive modeling and AI-driven content generation.",
-        "image": "https://drive.google.com/uc?export=view&id=12mcx8QJcpAZ26HURlTSdE58XA0iH-G6U",
+        "image": "https://raw.githubusercontent.com/Prem0709/Portfolio-website/main/profile.jpg",
         "socialLinks": [
             { "platform": "linkedin", "url": "https://www.linkedin.com/in/premkumar-pawar0709", "name": "LinkedIn" },
             { "platform": "github", "url": "https://github.com/Prem0709", "name": "GitHub" }
@@ -12,7 +12,7 @@
     "about": {
         "title": "About Me",
         "description": "I'm a B.Tech student in Computer Science and Engineering at Adarsh Institute of Technology and Research Center, Vita, Maharashtra (2021-2025, CGPA: 7.2/10). I specialize in machine learning, data visualization, and prompt engineering, with experience in projects like driver drowsiness detection and credit card fraud detection. I'm eager to contribute to a data-driven team and grow in the analytics space.",
-        "image": "https://drive.google.com/uc?export=view&id=12mcx8QJcpAZ26HURlTSdE58XA0iH-G6U",
+        "image": "https://raw.githubusercontent.com/Prem0709/Portfolio-website/main/profile.jpg",
         "readMoreLink": "#"
     },
     "services": [
@@ -37,28 +37,28 @@
     ],
     "projects": [
         {
-            "image": "https://via.placeholder.com/300x200",
+            "image": "https://raw.githubusercontent.com/Prem0709/Portfolio-website/main/project1.jpg",
             "title": "Driver Drowsiness Detection System",
             "description": "A real-time web app using Flask and OpenCV to monitor driver fatigue with live alerts, built for road safety.",
             "link": "#",
             "tags": ["Flask", "OpenCV", "Computer Vision"]
         },
         {
-            "image": "https://via.placeholder.com/300x200",
-            "title": "Credit Card Fraud Detection",
+            "image": "https://raw.githubusercontent.com/Prem0709/Portfolio-website/main/project2.jpg",
             "description": "Developed ML models to detect fraud in imbalanced datasets using SMOTE, XGBoost, and Scikit-learn.",
+            "title": "Credit Card Fraud Detection",
             "link": "#",
             "tags": ["Python", "Scikit-learn", "XGBoost"]
         },
         {
-            "image": "https://via.placeholder.com/300x200",
+            "image": "https://raw.githubusercontent.com/Prem0709/Portfolio-website/main/project3.jpg",
             "title": "LinkedIn Job Market Analysis",
             "description": "Performed EDA on 10,000+ job postings to analyze salary trends and in-demand skills using Pandas and Seaborn.",
             "link": "#",
             "tags": ["Pandas", "Seaborn", "Matplotlib"]
         },
         {
-            "image": "https://via.placeholder.com/300x200",
+            "image": "https://raw.githubusercontent.com/Prem0709/Portfolio-website/main/project4.jpg",
             "title": "EDA Automation Tool",
             "description": "Built a GenAI-powered tool for automated data profiling using Mistral, Gemma2, and Gradio.",
             "link": "#",
